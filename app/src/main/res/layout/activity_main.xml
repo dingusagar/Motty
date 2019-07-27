@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.motty.MainActivity">
+
+    <EditText
+        android:id="@+id/urlTextView"
+        android:layout_width="329dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginRight="43dp"
+        android:ems="10"
+        android:hint="youtube url"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_dimen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="331dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
+        android:text="click here to set the time"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_dimen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/urlTextView" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="331dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
+        android:text="click here to set the date"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_dimen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+
+    <ToggleButton
+        android:id="@+id/alarmToggleButton"
+        android:layout_width="161dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="127dp"
+        android:layout_marginLeft="127dp"
+        android:layout_marginEnd="127dp"
+        android:layout_marginRight="127dp"
+        android:layout_marginBottom="50dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
