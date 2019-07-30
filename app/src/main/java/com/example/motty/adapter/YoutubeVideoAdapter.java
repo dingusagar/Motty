@@ -17,10 +17,6 @@ import com.example.motty.utils.Constants;
 
 import java.util.ArrayList;
 
-/**
- * Created by sonu on 10/11/17.
- */
-
 public class YoutubeVideoAdapter extends RecyclerView.Adapter<YoutubeViewHolder> {
     private static final String TAG = YoutubeVideoAdapter.class.getSimpleName();
     private Context context;

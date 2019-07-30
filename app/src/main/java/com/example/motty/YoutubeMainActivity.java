@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.example.motty.adapter.YoutubeVideoAdapter;
 import com.example.motty.utils.Constants;
@@ -33,19 +34,27 @@ public class YoutubeMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-//        generateDummyVideoList();
-//        initializeYoutubePlayer();
-//        setUpRecyclerView();
-//        populateRecyclerView();
-        String url  = "http://www.youtube.com/watch?v=iJeh3x09Ya8";
-        watch_video(url);
+        setContentView(R.layout.youtube_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD|
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        Bundle bundle = getIntent().getExtras();
+        String url = Constants.DEFAULT_URL;
+        if(bundle != null){
+           url = bundle.getString(Constants.KEY_URL,Constants.DEFAULT_URL);
+        }
+        generateDummyVideoList();
+        initializeYoutubePlayer(url);
+        setUpRecyclerView();
+        populateRecyclerView();
     }
 
     /**
      * initialize youtube player via Fragment and get instance of YoutubePlayer
+     * @param url
      */
-    private void initializeYoutubePlayer() {
+    private void initializeYoutubePlayer(final String url) {
 
         youTubePlayerFragment = (YouTubePlayerSupportFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.youtube_player_fragment);
@@ -63,9 +72,8 @@ public class YoutubeMainActivity extends AppCompatActivity {
 
                     //set the player style default
                     youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
-
-                    //cue the 1st video by default
-                    youTubePlayer.cueVideo(youtubeVideoArrayList.get(0));
+                    Log.d(TAG,"Loading youtube video : "+ url);
+                    youTubePlayer.loadVideo(url);
                 }
             }
 
