@@ -4,74 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1D9D81CF"
     tools:context="com.example.motty.MainActivity">
 
-    <EditText
-        android:id="@+id/urlTextView"
-        android:layout_width="329dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginRight="43dp"
-        android:ems="10"
-        android:hint="youtube url"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_dimen"
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:cardCornerRadius="5dp"
+        android:elevation="@dimen/cardview_compat_inset_shadow"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/timeTextView"
-        android:layout_width="331dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginRight="41dp"
-        android:text="click here to set the time"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_dimen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/urlTextView" />
-
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="331dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginRight="41dp"
-        android:text="click here to set the date"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_dimen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+        <include
+            layout="@layout/new_alarm_form"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></include>
+    </android.support.v7.widget.CardView>
 
     <ToggleButton
         android:id="@+id/alarmToggleButton"
-        android:layout_width="161dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="127dp"
-        android:layout_marginLeft="127dp"
-        android:layout_marginEnd="127dp"
-        android:layout_marginRight="127dp"
-        android:layout_marginBottom="50dp"
-        android:text="ToggleButton"
+        android:layout_width="382dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="11dp"
+        android:textOn="CANCEL ALARM"
+        android:textOff="SET ALARM"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

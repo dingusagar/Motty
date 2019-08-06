@@ -37,6 +37,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
 
     private final Calendar alarmDateTime = Calendar.getInstance();
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    private SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH-mm");
+
 
 
     @Override
@@ -99,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
                 Boolean setAlarmOn = toggleButton.isChecked();
                 if (saveAlarmSettings()) {
                     toggleAlarm(setAlarmOn);
+                }else{
+                    toggleButton.setChecked(!toggleButton.isChecked());
                 }
 
             }
@@ -159,10 +165,10 @@ public class MainActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                dateTextView.setText(dayOfMonth + " : " + month + " : " + year);
                 alarmDateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 alarmDateTime.set(Calendar.MONTH, month);
                 alarmDateTime.set(Calendar.YEAR, year);
+                dateTextView.setText(simpleDateFormat.format(alarmDateTime.getTime()));
             }
         }, alarmDateTime.get(Calendar.YEAR), alarmDateTime.get(Calendar.MONTH), alarmDateTime.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
@@ -175,9 +181,9 @@ public class MainActivity extends AppCompatActivity {
         mTimePicker = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                timeTextView.setText(selectedHour + ":" + selectedMinute);
                 alarmDateTime.set(Calendar.HOUR_OF_DAY, selectedHour);
                 alarmDateTime.set(Calendar.MINUTE, selectedMinute);
+                timeTextView.setText(simpleTimeFormat.format(alarmDateTime.getTime()));
             }
         }, hour, minute, true);//Yes 24 hour time
         mTimePicker.setTitle("Select Time");
