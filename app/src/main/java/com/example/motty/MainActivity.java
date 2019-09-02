@@ -71,10 +71,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
-                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
-                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
-                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
+        enableActivityLoadOnScreenLock();
+
         sharedPreferences = getApplicationContext().getSharedPreferences(Constants.SHARED_PREF_NAME, 0);
         editor = sharedPreferences.edit();
 
@@ -113,6 +112,13 @@ public class MainActivity extends AppCompatActivity {
         handleVideoShareByOtherApps();
     }
 
+    private void enableActivityLoadOnScreenLock() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -135,10 +141,8 @@ public class MainActivity extends AppCompatActivity {
         if (extras != null) {
             String urlToPlay = extras.getString(Intent.EXTRA_TEXT, Constants.EMPTY_STRING);
             Log.i(TAG, "Got shared message : " + urlToPlay);
-            //TODO : handle share by apps other than youtube
             String videoId = getVideoIdFromYoutubeUrl(urlToPlay);
             urlEditText.setText(videoId);
-            Toast.makeText(getApplicationContext(), "Setting video id :  " + videoId, Toast.LENGTH_LONG).show();
         } else {
             Log.i(TAG, "Received nothing from other apps ");
         }

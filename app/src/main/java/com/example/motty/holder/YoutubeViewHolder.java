@@ -7,10 +7,6 @@ import android.view.View;
 import com.example.motty.R;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 
-/**
- * Created by sonu on 10/11/17.
- */
-
 public class YoutubeViewHolder  extends RecyclerView.ViewHolder{
     public YouTubeThumbnailView videoThumbnailImageView;
     public CardView youtubeCardView;
