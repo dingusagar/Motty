@@ -2,27 +2,20 @@ package com.example.motty;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,17 +23,10 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.example.motty.adapter.YoutubeVideoAdapter;
 import com.example.motty.utils.Constants;
-import com.example.motty.utils.RecyclerViewOnClickListener;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private final Calendar alarmDateTime = Calendar.getInstance();
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH-mm");
+
+    private Intent alarmServiceIntent;
 
 
 
@@ -130,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.stopService) {
             // do something
-            stopService(new Intent(this, AlarmHandlerService.class));
+            stopService(new Intent(this, AlarmSetService.class));
             return true;
         }
         return super.onContextItemSelected(item);
@@ -218,34 +206,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public void setAlarm() {
-//        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(MainActivity.this, AlarmManagerBroadcastReceiver.class);
-//        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-//        am.setRepeating(AlarmManager.RTC_WAKEUP, alarmDateTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
-//    }
-//
-//    public void cancelAlarm() {
-//        Intent intent = new Intent(MainActivity.this, AlarmManagerBroadcastReceiver.class);
-//        PendingIntent sender = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//        alarmManager.cancel(sender);
-//    }
-
     public void setAlarm() {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(MainActivity.this, AlarmHandlerService.class);
-        intent.putExtra(KEY_URL,urlEditText.getText().toString());
-        PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmDateTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        alarmServiceIntent = new Intent(this,AlarmSetService.class);
+        alarmServiceIntent.putExtra(KEY_ALARM_TIME,alarmDateTime.getTimeInMillis());
+        startService(alarmServiceIntent);
+
     }
 
     public void cancelAlarm() {
-        Intent intent = new Intent(MainActivity.this, AlarmHandlerService.class);
-        PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(pendingIntent);
+        stopService(alarmServiceIntent);
     }
+
+//    public void setAlarm() {
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        Intent intent = new Intent(MainActivity.this, AlarmSetService.class);
+//        intent.putExtra(KEY_URL,urlEditText.getText().toString());
+//        PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmDateTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+//    }
+//
+//    public void cancelAlarm() {
+//        Intent intent = new Intent(MainActivity.this, AlarmSetService.class);
+//        PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.cancel(pendingIntent);
+//    }
 
 
 }

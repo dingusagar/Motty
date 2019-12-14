@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/cardview_light_background">
+    android:background="@color/color_white">
 
     <TextView
         android:id="@+id/textview"
@@ -95,7 +95,7 @@
         android:layout_height="53dp"
         android:layout_marginStart="6dp"
         android:layout_marginLeft="6dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
         android:gravity="center"
@@ -118,7 +118,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="11dp"
         android:ems="10"
-        android:hint="type video id here"
+        android:hint="Type youtube video id here"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textSize="@dimen/text_dimen"
