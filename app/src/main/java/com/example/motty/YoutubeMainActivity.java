@@ -1,8 +1,11 @@
 package com.example.motty;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,15 +42,25 @@ public class YoutubeMainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD|
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
                 WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
+
         Bundle bundle = getIntent().getExtras();
-        String url = Constants.DEFAULT_URL;
+        String videoId = Constants.DEFAULT_URL;
         if(bundle != null){
-           url = bundle.getString(Constants.KEY_URL,Constants.DEFAULT_URL);
+           videoId = bundle.getString(Constants.KEY_URL,Constants.DEFAULT_URL);
         }
-        generateDummyVideoList();
-        initializeYoutubePlayer(url);
-        setUpRecyclerView();
-        populateRecyclerView();
+
+        SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        Boolean playInYoutube = defaultSharedPreferences.getBoolean(getResources().getString(R.string.key_youtube_open),Boolean.FALSE);
+        if(playInYoutube){
+            watch_video(videoId);
+        }else{
+            generateDummyVideoList();
+            initializeYoutubePlayer(videoId);
+            setUpRecyclerView();
+            populateRecyclerView();
+        }
+
     }
 
     /**
@@ -139,7 +152,7 @@ public class YoutubeMainActivity extends AppCompatActivity {
 
     void watch_video(String url)
     {
-        Intent yt_play = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        Intent yt_play = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + url));
 
         if (yt_play .resolveActivity(getPackageManager()) != null) {
             startActivity(yt_play);

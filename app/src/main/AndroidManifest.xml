@@ -38,6 +38,7 @@
         <receiver android:name=".AlarmManagerBroadcastReceiver" />
 
         <activity android:name=".YoutubeMainActivity" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

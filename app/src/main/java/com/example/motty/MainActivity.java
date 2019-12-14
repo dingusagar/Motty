@@ -1,15 +1,11 @@
 package com.example.motty;
 
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -119,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.stopService) {
             // do something
             stopService(new Intent(this, AlarmSetService.class));
+            return true;
+        }else if(item.getItemId() == R.id.action_settings){
+            startActivity(new Intent(this,SettingsActivity.class));
             return true;
         }
         return super.onContextItemSelected(item);
